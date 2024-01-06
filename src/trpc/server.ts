@@ -1,5 +1,5 @@
+import { createTRPCContext } from '@/server/api/context';
 import { appRouter, type AppRouter } from '@/server/api/root';
-import { createTRPCContext } from '@/server/api/trpc';
 import {
   createTRPCProxyClient,
   loggerLink,
