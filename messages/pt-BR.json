@@ -1,0 +1,23 @@
+{
+  "Metadata": {
+    "title": "Atendim - Simplifique sua Agenda com Nosso Aplicativo de Agendamento Moderno",
+    "description": "O Atendim simplifica o agendamento sem esforço. Gerencie compromissos, personalize disponibilidades, acompanhe clientes e receba lembretes oportunos, tudo em um aplicativo seguro e fácil de usar.",
+    "keywords": "Simplificar agendamentos, gerenciador de compromissos, otimizar agendamentos, disponibilidade personalizável, acompanhamento de clientes, lembretes seguros, interface amigável."
+  },
+  "MarketingPage": {
+    "title": "Atendim",
+    "hero": {
+      "badge": "Bem-vindo ao Atendim",
+      "title": {
+        "prefix": "Seu Aplicativo",
+        "span": "Moderno de Agendamento.",
+        "suffix": ""
+      },
+      "description": "Assuma o controle da sua agenda e simplifique seus compromissos sem esforço com o Atendim. Nosso aplicativo de ponta foi projetado para simplificar o seu dia a dia, permitindo que você gerencie compromissos com facilidade, tudo ao alcance dos seus dedos.",
+      "button": {
+        "text": "Comece Agora",
+        "link": "/signup"
+      }
+    }
+  }
+}
