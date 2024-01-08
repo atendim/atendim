@@ -1,0 +1,23 @@
+{
+  "Metadata": {
+    "title": "Atendim - Simplify Your Schedule with Our Modern Scheduler App",
+    "description": "Atendim streamlines scheduling effortlessly. Manage appointments, customize availability, track customers, and get timely reminders—all in a secure, user-friendly app.",
+    "keywords": "Scheduler app, appointment management, streamline appointments, customizable availability, customer management, notifications and reminders, secure scheduling, user-friendly interface"
+  },
+  "MarketingPage": {
+    "title": "Atendim",
+    "hero": {
+      "badge": "Welcome to Atendim",
+      "title": {
+        "prefix": "Your",
+        "span": "Ultimate Scheduler",
+        "suffix": "App."
+      },
+      "description": "Take control of your schedule and streamline your appointments effortlessly with Atendim. Our cutting-edge app is designed to simplify your day-to-day by allowing you to manage appointments with ease, all at your fingertips.",
+      "button": {
+        "text": "Get Started",
+        "link": "/signup"
+      }
+    }
+  }
+}
