@@ -1,11 +1,13 @@
 import { Container } from '@/components/container';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 import { Fragment } from 'react';
 import { LandingPageNavBar } from './_components/landing-page-nav-bar';
 
 export default async function MarketingPage() {
+  const locale = await getLocale();
   const t = await getTranslations('MarketingPage');
   return (
     <Container>
@@ -19,12 +21,12 @@ export default async function MarketingPage() {
         <p className='text-md text-center text-gray-600'>
           {t('hero.description')}
         </p>
-        <Button>
+        <Link href={`${locale}/sign-in`} className={buttonVariants()}>
           <Fragment>
             {t('hero.button.text')}
             <ChevronRight />
           </Fragment>
-        </Button>
+        </Link>
       </div>
     </Container>
   );
