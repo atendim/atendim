@@ -14,6 +14,7 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
   });
 
   console.log({
+    nextUrl: req.nextUrl?.pathname,
     urlLocale,
     cookieLocale,
     locale
@@ -27,5 +28,5 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
 }
 
 export const config = {
-  matcher: ['/', `/(en|pt-BR)/:path*`]
+  matcher: ['/', '/((?!api|_next/static|_next/image|favicon.ico).*)']
 };
