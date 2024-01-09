@@ -19,5 +19,22 @@
         "link": "/signup"
       }
     }
+  },
+  "Auth": {
+    "email": "Email",
+    "password": "Senha",
+    "alreadyHasAnAccount": "Já possui uma conta?",
+    "signup": "Cadastre-se",
+    "signin": "Entre",
+    "errors": {
+      "email": {
+        "required": "O email é obrigatório",
+        "invalid": "O email é inválido"
+      },
+      "password": {
+        "required": "A senha é obrigatória",
+        "minLength": "A senha deve ter pelo menos 8 caracteres"
+      }
+    }
   }
 }
