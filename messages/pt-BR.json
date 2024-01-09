@@ -24,6 +24,7 @@
     "email": "Email",
     "password": "Senha",
     "alreadyHasAnAccount": "Já possui uma conta?",
+    "dontHaveAnAccount": "Não possui uma conta?",
     "signup": "Cadastre-se",
     "signin": "Entre",
     "errors": {

@@ -24,6 +24,7 @@
     "email": "Email",
     "password": "Password",
     "alreadyHasAnAccount": "Already have an account?",
+    "dontHaveAnAccount": "Don't have an account?",
     "signup": "Sign Up",
     "signin": "Sign In",
     "errors": {
