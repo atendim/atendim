@@ -12,12 +12,15 @@ import { localeNames, locales } from '@/i18n';
 import { cn } from '@/lib/utils';
 import { ArrowUpRight, Languages } from 'lucide-react';
 import Link from 'next/link';
+import { Icons } from './icons';
 import { navigationMenuTriggerStyle } from './ui/navigation-menu';
 
 const Logo = () => {
   return (
     <NavigationMenuItem>
-      <Link href='/'>Atendim</Link>
+      <Link href='/'>
+        <Icons.Logo className='w-24' />
+      </Link>
     </NavigationMenuItem>
   );
 };
@@ -80,9 +83,19 @@ const List = ({
   );
 };
 
-export const NavBar = {
-  Logo,
-  LanguageSwitcher,
-  Root,
-  List
+const NavBar = () => {
+  return (
+    <Root>
+      <List>
+        <Logo />
+      </List>
+    </Root>
+  );
 };
+
+NavBar.Root = Root;
+NavBar.List = List;
+NavBar.Logo = Logo;
+NavBar.LanguageSwitcher = LanguageSwitcher;
+
+export { NavBar };
