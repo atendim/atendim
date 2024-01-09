@@ -1,37 +1,16 @@
 'use client';
 
+import { Form } from '@/components/form';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  MessageKeys,
-  NamespaceKeys,
-  NestedKeyOf,
-  NestedValueOf,
-  useTranslations
-} from 'next-intl';
-import React, { ForwardedRef, HTMLInputTypeAttribute, forwardRef } from 'react';
+  SignInSchema,
+  signInValidator
+} from '@/lib/validators/sigin-validator';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
-const signInValidator = z.object({
-  email: z
-    .string({
-      invalid_type_error: 'errors.email.invalid',
-      required_error: 'errors.email.required'
-    })
-    .email(),
-  password: z
-    .string({
-      required_error: 'errors.password.required'
-    })
-    .min(8, 'errors.password.minLength')
-});
-
-type SignInSchema = z.infer<typeof signInValidator>;
-
-export function Form() {
+export function SignInForm() {
   const {
     register,
     formState: { errors },
@@ -44,6 +23,7 @@ export function Form() {
   const t = useTranslations(baseTranslations);
 
   const onSubmit = (data: SignInSchema) => {
+    // TODO handle login
     console.log(data);
   };
 
@@ -54,7 +34,7 @@ export function Form() {
       noValidate
     >
       <div className='flex flex-col gap-4'>
-        <FormInput
+        <Form.FormInput
           id='email'
           type='email'
           baseTranslations={baseTranslations}
@@ -64,7 +44,7 @@ export function Form() {
         />
       </div>
       <div className='flex flex-col gap-4'>
-        <FormInput
+        <Form.FormInput
           id='password'
           type='password'
           baseTranslations={baseTranslations}
@@ -73,58 +53,7 @@ export function Form() {
           {...register('password')}
         />
       </div>
-      <Button type='submit'>Sign In</Button>
+      <Button type='submit'>{t('signin')}</Button>
     </form>
   );
 }
-
-type NestedKey = NamespaceKeys<Messages, NestedKeyOf<Messages>>;
-
-type Target<Key extends NestedKey> = MessageKeys<
-  NestedValueOf<
-    {
-      '!': IntlMessages;
-    },
-    [Key] extends [never] ? '!' : `!.${Key}`
-  >,
-  NestedKeyOf<
-    NestedValueOf<
-      {
-        '!': IntlMessages;
-      },
-      [Key] extends [never] ? '!' : `!.${Key}`
-    >
-  >
->;
-
-interface FormInputProps<Base extends NestedKey>
-  extends Omit<React.ComponentProps<'input'>, 'ref' | 'id' | 'type'> {
-  errorMessage?: string;
-  baseTranslations: Base;
-  label?: Target<Base>;
-  type: HTMLInputTypeAttribute;
-  id: string;
-}
-
-const FormInput = forwardRef(
-  <Base extends NestedKey>(
-    { errorMessage, baseTranslations, label, ...props }: FormInputProps<Base>,
-    ref: ForwardedRef<HTMLInputElement>
-  ) => {
-    const t = useTranslations(baseTranslations);
-
-    return (
-      <div className='flex flex-col gap-2'>
-        {label ? <Label htmlFor={props.id}>{t(label)}</Label> : null}
-        <Input ref={ref} {...props} />
-        {errorMessage ? (
-          <span className='text-xs text-red-600'>
-            {t(errorMessage as Target<Base>)}
-          </span>
-        ) : null}
-      </div>
-    );
-  }
-);
-
-FormInput.displayName = 'FormInput';
