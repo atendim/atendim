@@ -6,8 +6,8 @@ export const locales = ['en', 'pt-BR'] as const;
 export const defaultLocale = locales[1];
 
 export const localeNames: Record<Locale, string> = {
-  en: 'English',
-  'pt-BR': 'Português'
+  en: 'English (EUA)',
+  'pt-BR': 'Português (Brasil)'
 };
 
 export type Locale = (typeof locales)[number];
