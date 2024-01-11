@@ -3,9 +3,9 @@
 import { Form } from '@/components/form';
 import { Button } from '@/components/ui/button';
 import {
-  SignInSchema,
-  signInValidator
-} from '@/lib/validators/sigin-validator';
+  AuthSchema,
+  authCredentialsValidator
+} from '@/lib/validators/auth-credentials';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
@@ -15,14 +15,14 @@ export function SignInForm() {
     register,
     formState: { errors },
     handleSubmit
-  } = useForm<SignInSchema>({
-    resolver: zodResolver(signInValidator)
+  } = useForm<AuthSchema>({
+    resolver: zodResolver(authCredentialsValidator)
   });
 
   const baseTranslations = 'Auth' as const;
   const t = useTranslations(baseTranslations);
 
-  const onSubmit = (data: SignInSchema) => {
+  const onSubmit = (data: AuthSchema) => {
     // TODO handle login
     console.log(data);
   };

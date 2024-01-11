@@ -7,7 +7,7 @@ function AuthLayout({ children }: PropsWithChildren) {
   return (
     <Container>
       <div className='flex items-center justify-center py-14'>
-        <Link href={'/sign-up'}>
+        <Link href={'/'}>
           <Icons.Logo className='w-48' />
         </Link>
       </div>
