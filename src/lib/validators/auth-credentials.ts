@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const signInValidator = z.object({
+export const authCredentialsValidator = z.object({
   email: z
     .string({
       invalid_type_error: 'errors.email.invalid',
@@ -14,4 +14,4 @@ export const signInValidator = z.object({
     .min(8, 'errors.password.minLength')
 });
 
-export type SignInSchema = z.infer<typeof signInValidator>;
+export type AuthSchema = z.infer<typeof authCredentialsValidator>;
