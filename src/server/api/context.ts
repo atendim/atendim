@@ -1,4 +1,5 @@
 import { db } from '@/server/db';
+import { getTranslations } from 'next-intl/server';
 
 interface ContextOptions {
   // session: Session | null
@@ -6,7 +7,8 @@ interface ContextOptions {
 }
 
 export async function createTRPCContext(_opts: ContextOptions) {
-  return { db, ..._opts };
+  const t = await getTranslations();
+  return { db, t, ..._opts };
 }
 
 export type Context = Awaited<ReturnType<typeof createTRPCContext>>;
