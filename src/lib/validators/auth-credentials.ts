@@ -6,7 +6,7 @@ export const authCredentialsValidator = z.object({
       invalid_type_error: 'errors.email.invalid',
       required_error: 'errors.email.required'
     })
-    .email(),
+    .email('errors.email.invalid'),
   password: z
     .string({
       required_error: 'errors.password.required'
