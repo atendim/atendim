@@ -1,9 +1,10 @@
 import { Container } from '@/components/container';
+import { SignUpForm } from './_components/form';
 
 function SignUpPage() {
   return (
     <Container>
-      <h1>SigIn</h1>
+      <SignUpForm />
     </Container>
   );
 }
