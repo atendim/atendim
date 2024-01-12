@@ -30,11 +30,19 @@
     "errors": {
       "email": {
         "required": "O email é obrigatório",
-        "invalid": "O email é inválido"
+        "invalid": "O email é inválido",
+        "emailAlreadyExists": "Email já existe"
       },
       "password": {
         "required": "A senha é obrigatória",
         "minLength": "A senha deve ter pelo menos 8 caracteres"
+      },
+      "user": {
+        "userAlreadyExists": "Usuário já existe",
+        "userNotFound": "Usuário não encontrado"
+      },
+      "credentials": {
+        "incorrect": "Email ou senha incorretos"
       }
     }
   }
