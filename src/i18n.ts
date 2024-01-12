@@ -12,6 +12,8 @@ export const localeNames: Record<Locale, string> = {
 
 export type Locale = (typeof locales)[number];
 
+export const LOCALE_COOKIE = 'NEXT_LOCALE' as const;
+
 export default getRequestConfig(async ({ locale: pathLocale }) => {
   if (!locales.includes(pathLocale as any)) notFound();
 
