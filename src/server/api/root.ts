@@ -1,8 +1,10 @@
-import { signIn } from './routers/auth';
-import { createTRPCRouter } from './trpc';
+import { auth } from './routers/auth';
+import { createTRPCCaller, createTRPCRouter } from './trpc';
 
 export const appRouter = createTRPCRouter({
-  signIn
+  auth
 });
+
+export const callerFactory = createTRPCCaller(appRouter);
 
 export type AppRouter = typeof appRouter;
