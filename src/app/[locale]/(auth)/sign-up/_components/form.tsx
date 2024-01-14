@@ -24,7 +24,7 @@ export function SignUpForm() {
   const baseTranslations = 'Auth' as const;
   const t = useTranslations(baseTranslations);
 
-  const signIn = apiClient.auth.signIn.useMutation({
+  const signIn = apiClient.auth.signUp.useMutation({
     onError(error) {
       toast.error(error.message);
     },
