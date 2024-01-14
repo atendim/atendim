@@ -15,8 +15,8 @@ jest.mock('@/server/utils/hash', () => ({
 }));
 
 describe('Auth route tets', () => {
-  describe('signIn', () => {
-    const input: inferProcedureInput<AppRouter['auth']['signIn']> = {
+  describe('signUp', () => {
+    const input: inferProcedureInput<AppRouter['auth']['signUp']> = {
       email: 'test@mail.com',
       password: '12345678'
     };
@@ -28,7 +28,7 @@ describe('Auth route tets', () => {
 
       translations.mockReturnValue('error-message');
 
-      await expect(caller.auth.signIn(input)).rejects.toThrow(
+      await expect(caller.auth.signUp(input)).rejects.toThrow(
         new TRPCClientError('error-message')
       );
 
@@ -42,7 +42,7 @@ describe('Auth route tets', () => {
       });
     });
 
-    it('should create a new user', async () => {
+    it('should create a new user with success', async () => {
       dbMock.user.findUnique.mockResolvedValue(null);
 
       const hashedPassword = 'hashed-password';
@@ -62,7 +62,7 @@ describe('Auth route tets', () => {
 
       dbMock.user.create.mockResolvedValue(user);
 
-      await expect(caller.auth.signIn(input)).resolves.toBe(user);
+      await expect(caller.auth.signUp(input)).resolves.toBe(user);
 
       expect(dbMock.user.create).toHaveBeenCalledWith({
         data: {
@@ -82,7 +82,7 @@ describe('Auth route tets', () => {
         password: 'invalid'
       };
 
-      await expect(caller.auth.signIn(invalidInputs)).rejects.toThrowError();
+      await expect(caller.auth.signUp(invalidInputs)).rejects.toThrowError();
     });
   });
 });

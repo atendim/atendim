@@ -4,7 +4,7 @@ import { TRPCError } from '@trpc/server';
 import { createTRPCRouter, publicProcedure } from '../trpc';
 
 export const auth = createTRPCRouter({
-  signIn: publicProcedure
+  signUp: publicProcedure
     .input(authCredentialsValidator)
     .mutation(async ({ ctx, input }) => {
       const { email, password } = input;
