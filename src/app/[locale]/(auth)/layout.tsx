@@ -11,7 +11,9 @@ function AuthLayout({ children }: PropsWithChildren) {
           <Icons.Logo className='w-48' />
         </Link>
       </div>
-      {children}
+      <section className='mx-auto flex flex-col gap-4 sm:px-8 md:max-w-[70%] lg:max-w-[50%] '>
+        {children}
+      </section>
     </Container>
   );
 }
