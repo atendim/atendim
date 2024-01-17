@@ -9,17 +9,16 @@ import { callProcedure } from '@trpc/server';
 import { observable } from '@trpc/server/observable';
 import { TRPCErrorResponse } from '@trpc/server/rpc';
 import { cookies } from 'next/headers';
-import { cache } from 'react';
 import { transformer } from './shared';
 
-const createContext = cache(() => {
+const createContext = () => {
   return createTRPCContext({
     headers: new Headers({
       cookie: cookies().toString(),
       'x-trpc-source': 'rsc'
     })
   });
-});
+};
 
 export const api = createTRPCProxyClient<AppRouter>({
   transformer,
