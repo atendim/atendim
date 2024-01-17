@@ -44,7 +44,7 @@ const LanguageSwitcher = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    'w-full gap-2 px-2'
+                    'w-full gap-2 px-2 text-base'
                   )}
                 >
                   {localeNames[locale]}
