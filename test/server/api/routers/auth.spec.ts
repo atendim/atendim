@@ -7,10 +7,12 @@ import { inferProcedureInput } from '@trpc/server';
 import { dbMock } from '../../mocks/db.mock';
 import { translations } from '../../mocks/i18n.mock';
 import { caller } from '../../mocks/trpc.mock';
+import { baseUser } from '../../mocks/user.mock';
 
 jest.mock('@/server/utils/hash', () => ({
   HashUtils: {
-    buildHashedPassword: jest.fn()
+    buildHashedPassword: jest.fn(),
+    compareHashedPassword: jest.fn()
   }
 }));
 
@@ -52,12 +54,10 @@ describe('Auth route tets', () => {
       );
 
       const user: User = {
+        ...baseUser,
         email: input.email,
         password: hashedPassword,
-        id: 1,
-        name: 'test',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        name: 'test'
       };
 
       dbMock.user.create.mockResolvedValue(user);
@@ -83,6 +83,86 @@ describe('Auth route tets', () => {
       };
 
       await expect(caller.auth.signUp(invalidInputs)).rejects.toThrowError();
+    });
+  });
+
+  describe('authorizeCredentials', () => {
+    const input: inferProcedureInput<
+      AppRouter['auth']['authorizeCredentials']
+    > = {
+      email: 'test@mail.com',
+      password: '12345678'
+    };
+
+    it('should throw an user not found error', async () => {
+      dbMock.user.findUnique.mockResolvedValue(null);
+
+      translations.mockReturnValue('wrong-credentials');
+
+      await expect(caller.auth.authorizeCredentials(input)).rejects.toThrow(
+        new TRPCClientError('wrong-credentials')
+      );
+
+      expect(dbMock.user.findUnique).toHaveBeenCalledWith({
+        where: {
+          email: input.email
+        }
+      });
+      expect(translations).toHaveBeenCalledWith(
+        'Auth.errors.credentials.incorrect'
+      );
+      expect(HashUtils.compareHashedPassword).toHaveBeenCalledWith(
+        input.password,
+        undefined
+      );
+    });
+
+    it('should throw an error if password does not match', async () => {
+      const user: User = {
+        ...baseUser,
+        email: input.email,
+        password: 'hashed-password'
+      };
+
+      dbMock.user.findUnique.mockResolvedValue(user);
+
+      HashUtils.compareHashedPassword = jest.fn().mockResolvedValue(false);
+
+      translations.mockReturnValue('wrong-credentials');
+
+      await expect(caller.auth.authorizeCredentials(input)).rejects.toThrow(
+        new TRPCClientError('wrong-credentials')
+      );
+
+      expect(dbMock.user.findUnique).toHaveBeenCalledWith({
+        where: { email: input.email }
+      });
+      expect(HashUtils.compareHashedPassword).toHaveBeenCalledWith(
+        input.password,
+        user.password
+      );
+    });
+
+    it('should return the user with success', async () => {
+      const user: User = {
+        ...baseUser,
+        email: input.email,
+        password: 'hashed-password'
+      };
+
+      dbMock.user.findUnique.mockResolvedValue(user);
+
+      HashUtils.compareHashedPassword = jest.fn().mockResolvedValue(true);
+
+      await expect(caller.auth.authorizeCredentials(input)).resolves.toBe(user);
+
+      expect(dbMock.user.findUnique).toHaveBeenCalledWith({
+        where: { email: input.email }
+      });
+      expect(HashUtils.compareHashedPassword).toHaveBeenCalledWith(
+        input.password,
+        user.password
+      );
     });
   });
 });
