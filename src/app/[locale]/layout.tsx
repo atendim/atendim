@@ -1,4 +1,5 @@
 import { Providers } from '@/components/providers';
+import { Toaster } from '@/components/ui/sonner';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
@@ -32,6 +33,10 @@ export default function RootLayout({
     <html lang={locale}>
       <body className={inter.className}>
         <Providers>{children}</Providers>
+        <footer className='padding fixed bottom-0 w-full px-4 py-4 text-center text-xs text-gray-400'>
+          All rights reserved. © {new Date().getFullYear()}.
+        </footer>
+        <Toaster richColors />
       </body>
     </html>
   );
