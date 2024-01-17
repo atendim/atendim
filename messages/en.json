@@ -19,5 +19,37 @@
         "link": "/signup"
       }
     }
+  },
+  "Auth": {
+    "email": "Email",
+    "password": "Password",
+    "alreadyHasAnAccount": "Already have an account?",
+    "dontHaveAnAccount": "Don't have an account?",
+    "signup": "Sign Up",
+    "signin": "Sign In",
+    "errors": {
+      "email": {
+        "required": "Email is required",
+        "invalid": "Email is invalid",
+        "emailAlreadyExists": "Email already exists",
+        "emailNotFound": "Email not found"
+      },
+      "password": {
+        "required": "Password is required",
+        "minLength": "Password must be at least 8 characters"
+      },
+      "user": {
+        "userAlreadyExists": "User already exists",
+        "userNotFound": "User not found"
+      },
+      "credentials": {
+        "incorrect": "Email or password is incorrect"
+      },
+      "somethingWentWrong": "Something went wrong :("
+    },
+    "success": {
+      "signup": "User created successfully",
+      "signin": "User signed in successfully"
+    }
   }
 }

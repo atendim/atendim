@@ -1,8 +1,10 @@
-import { hello } from './routers/hello';
-import { createTRPCRouter } from './trpc';
+import { auth } from './routers/auth';
+import { createTRPCCaller, createTRPCRouter } from './trpc';
 
 export const appRouter = createTRPCRouter({
-  hello
+  auth
 });
+
+export const callerFactory = createTRPCCaller(appRouter);
 
 export type AppRouter = typeof appRouter;

@@ -10,8 +10,9 @@ on:
     branches: ["develop", "main", "feature/*", "hotfix/*", "release/*", "chores/*", "bugfix/*"]
 
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
+    name: Build & Test 
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js
@@ -19,6 +20,11 @@ jobs:
       with:
         node-version: 21
         cache: 'npm'
+
+    - name: Set up environment variables
+      run: |
+        cp .env.sample .env
+        export $(grep -v '^#' .env | xargs)
 
     - name: Install Dependencies
       run: npm ci

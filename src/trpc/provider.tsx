@@ -6,7 +6,7 @@ import { createTRPCReact, httpBatchLink, loggerLink } from '@trpc/react-query';
 import React, { useState } from 'react';
 import { getUrl, transformer } from './shared';
 
-export const api = createTRPCReact<AppRouter>();
+export const apiClient = createTRPCReact<AppRouter>();
 
 export function TRPCProvider({
   children,
@@ -15,7 +15,7 @@ export function TRPCProvider({
   const [queryClient] = useState(() => new QueryClient());
 
   const [trpcClient] = useState(() =>
-    api.createClient({
+    apiClient.createClient({
       transformer,
       links: [
         loggerLink({
@@ -38,9 +38,9 @@ export function TRPCProvider({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <api.Provider client={trpcClient} queryClient={queryClient}>
+      <apiClient.Provider client={trpcClient} queryClient={queryClient}>
         {children}
-      </api.Provider>
+      </apiClient.Provider>
     </QueryClientProvider>
   );
 }

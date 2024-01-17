@@ -1,9 +1,9 @@
+import { Providers } from '@/components/providers';
+import { Toaster } from '@/components/ui/sonner';
 import '@/styles/globals.css';
-import { TRPCProvider } from '@/trpc/provider';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { Inter } from 'next/font/google';
-import { cookies } from 'next/headers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,7 +32,11 @@ export default function RootLayout({
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <TRPCProvider cookies={cookies().toString()}>{children}</TRPCProvider>
+        <Providers>{children}</Providers>
+        <footer className='padding fixed bottom-0 w-full px-4 py-4 text-center text-xs text-gray-400'>
+          All rights reserved. © {new Date().getFullYear()}.
+        </footer>
+        <Toaster richColors />
       </body>
     </html>
   );
