@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { SignUpForm } from './_components/form';
+import { SignUpForm } from './_components/sign-up-form';
 
 async function SignUpPage() {
   const t = await getTranslations('Auth');
