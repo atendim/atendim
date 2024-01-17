@@ -31,7 +31,8 @@
       "email": {
         "required": "Email is required",
         "invalid": "Email is invalid",
-        "emailAlreadyExists": "Email already exists"
+        "emailAlreadyExists": "Email already exists",
+        "emailNotFound": "Email not found"
       },
       "password": {
         "required": "Password is required",
@@ -43,7 +44,12 @@
       },
       "credentials": {
         "incorrect": "Email or password is incorrect"
-      }
+      },
+      "somethingWentWrong": "Something went wrong :("
+    },
+    "success": {
+      "signup": "User created successfully",
+      "signin": "User signed in successfully"
     }
   }
 }
