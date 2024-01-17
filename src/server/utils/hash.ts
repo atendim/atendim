@@ -6,6 +6,15 @@ async function buildHashedPassword(password: string) {
   return hashedPassword;
 }
 
+async function compareHashedPassword(
+  password: string,
+  hashedPassword?: string
+) {
+  if (!hashedPassword) return false;
+  return await bcrypt.compare(password, hashedPassword);
+}
+
 export const HashUtils = {
-  buildHashedPassword
+  buildHashedPassword,
+  compareHashedPassword
 };
