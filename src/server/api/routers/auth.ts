@@ -33,5 +33,31 @@ export const auth = createTRPCRouter({
           name
         }
       });
+    }),
+
+  authorizeCredentials: publicProcedure
+    .input(authCredentialsValidator)
+    .mutation(async ({ ctx, input }) => {
+      const { email, password } = input;
+
+      const user = await ctx.db.user.findUnique({
+        where: {
+          email
+        }
+      });
+
+      const passwordMatch = await HashUtils.compareHashedPassword(
+        password,
+        user?.password
+      );
+
+      if (!passwordMatch) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: ctx.t('Auth.errors.credentials.incorrect')
+        });
+      }
+
+      return user;
     })
 });
